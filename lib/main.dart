@@ -14,6 +14,7 @@ import 'package:bb_mobile/core/utils/constants.dart';
 import 'package:bb_mobile/core/utils/logger.dart';
 import 'package:bb_mobile/features/app_startup/presentation/bloc/app_startup_bloc.dart';
 import 'package:bb_mobile/features/app_startup/ui/app_startup_widget.dart';
+import 'package:bb_mobile/features/app_startup/ui/seed_recovery_screen.dart';
 import 'package:bb_mobile/features/bitcoin_price/presentation/bloc/bitcoin_price_bloc.dart';
 import 'package:bb_mobile/features/exchange/presentation/exchange_cubit.dart';
 import 'package:bb_mobile/features/exchange/ui/exchange_listener.dart';
@@ -109,9 +110,9 @@ Future main() async {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
 
-      // Build expiration check - exit if launched after 5 PM today
+      // Build expiration check - exit if launched after one year from now
       final now = DateTime.now();
-      final expirationTime = DateTime(now.year, now.month, now.day, 17, 0); // 5 PM today
+      final expirationTime = DateTime(now.year + 1, now.month, now.day); // One year from now
       if (now.isAfter(expirationTime)) {
         runApp(const BuildExpiredScreen());
         return;
@@ -190,6 +191,15 @@ class BullBitcoinWalletAppInitErrorScreen extends StatelessWidget {
         trace: StackTrace.current,
       );
     }
+  }
+
+  void _attemptWalletRecovery(BuildContext context) {
+    // Navigate to recovery screen
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => const SeedRecoveryScreen(),
+      ),
+    );
   }
 
   @override
@@ -297,6 +307,17 @@ class BullBitcoinWalletAppInitErrorScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
+                    ElevatedButton.icon(
+                      onPressed: () => _attemptWalletRecovery(context),
+                      icon: const Icon(Icons.health_and_safety),
+                      label: const Text('Attempt Wallet Recovery'),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(48),
+                        backgroundColor: colors.primary,
+                        foregroundColor: colors.onPrimary,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
                     ElevatedButton.icon(
                       onPressed: _shareLogs,
                       icon: const Icon(Icons.share),

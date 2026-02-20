@@ -25,6 +25,10 @@ class StorageLocator {
         // In flutter_secure_storage v10+, resetOnError defaults to TRUE.
         // Setting true will delete secure storage contents on errors!!
         // We must set it to false and handle errors manually.
+
+        // TESTING: Enable migration with backup for systematic failure testing
+        migrateWithBackup: true,
+        migrateOnAlgorithmChange: true,
       ),
       iOptions: IOSOptions(
         accessibility: KeychainAccessibility.first_unlock_this_device,

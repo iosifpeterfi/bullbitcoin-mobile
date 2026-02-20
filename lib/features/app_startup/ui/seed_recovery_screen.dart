@@ -42,6 +42,7 @@ class _SeedRecoveryScreenState extends State<SeedRecoveryScreen> {
         aOptions: AndroidOptions(
           recoveryMode: true,
           resetOnError: false,
+          migrateWithBackup: true,
         ),
       );
 
@@ -252,6 +253,7 @@ class _SeedRecoveryScreenState extends State<SeedRecoveryScreen> {
         aOptions: AndroidOptions(
           recoveryMode: true,
           resetOnError: false,
+          migrateWithBackup: true,
         ),
       );
 

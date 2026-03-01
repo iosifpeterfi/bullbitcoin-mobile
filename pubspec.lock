@@ -763,7 +763,7 @@ packages:
     description:
       path: flutter_secure_storage
       ref: recovery_mode
-      resolved-ref: "62439224e72a38875f339144d850cb1922866b3d"
+      resolved-ref: "0be72f66903814c22aade943770c5393f193bf83"
       url: "https://github.com/iosifpeterfi/flutter_secure_storage"
     source: git
     version: "10.0.0"
